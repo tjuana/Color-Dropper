@@ -1,3 +1,6 @@
+const colorCache = new Map<string, string>();
+let animationFrameId: number;
+
 export function getHexColorFromImageData(imageData: Uint8ClampedArray): string {
   const [r, g, b] = imageData;
   return `#${((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase()}`;
@@ -73,26 +76,37 @@ export function handleMouseMoveLogic(
 ): void {
   if (!offscreenCanvas) return;
 
-  const canvas = canvasRef.current;
-  const offscreenCtx = offscreenCanvas.getContext('2d');
+  cancelAnimationFrame(animationFrameId);
+  animationFrameId = requestAnimationFrame(() => {
+    const canvas = canvasRef.current;
+    const offscreenCtx = offscreenCanvas.getContext('2d');
 
-  if (canvas && offscreenCtx) {
-      const rect = canvas.getBoundingClientRect();
-      const x = Math.floor(event.clientX - rect.left);
-      const y = Math.floor(event.clientY - rect.top);
+    if (canvas && offscreenCtx) {
+        const rect = canvas.getBoundingClientRect();
+        const x = Math.floor(event.clientX - rect.left);
+        const y = Math.floor(event.clientY - rect.top);
 
-      const imageData = offscreenCtx.getImageData(x, y, 1, 1).data;
-      const hexColor = getHexColorFromImageData(imageData);
+        const cacheKey = `${x},${y}`;
+        let hexColor = colorCache.get(cacheKey);
 
-      setDropperPosition({ x, y });
+        if (!hexColor) {
+            const imageData = offscreenCtx.getImageData(x, y, 1, 1).data;
+            hexColor = getHexColorFromImageData(imageData);
+            colorCache.set(cacheKey, hexColor);
+        }
 
-      const zoomedBackground = getZoomedImage(offscreenCanvas, x, y, 2, 50, 50);
-      if (zoomedBackground) {
-          setZoomedBackground(zoomedBackground);
-      }
+        setDropperPosition({ x, y });
 
-      dropperRef.current && (dropperRef.current.innerText = hexColor);
-  }
+        const zoomedBackground = getZoomedImage(offscreenCanvas, x, y, 2, 50, 50);
+        if (zoomedBackground) {
+            setZoomedBackground(zoomedBackground);
+        }
+
+        if (dropperRef.current) {
+            dropperRef.current.innerText = hexColor;
+        }
+    }
+  });
 }
 
 export function handleKeyDownLogic(
@@ -133,14 +147,22 @@ export function handleKeyDownLogic(
 
   const offscreenCtx = offscreenCanvas.getContext('2d');
   if (offscreenCtx) {
-      const imageData = offscreenCtx.getImageData(x, y, 1, 1).data;
-      const hexColor = getHexColorFromImageData(imageData);
+      const cacheKey = `${x},${y}`;
+      let hexColor = colorCache.get(cacheKey);
+
+      if (!hexColor) {
+          const imageData = offscreenCtx.getImageData(x, y, 1, 1).data;
+          hexColor = getHexColorFromImageData(imageData);
+          colorCache.set(cacheKey, hexColor);
+      }
 
       const zoomedBackground = getZoomedImage(offscreenCanvas, x, y, 2, 50, 50);
       if (zoomedBackground) {
           setZoomedBackground(zoomedBackground);
       }
 
-      dropperRef.current && (dropperRef.current.innerText = hexColor);
+      if (dropperRef.current) {
+          dropperRef.current.innerText = hexColor;
+      }
   }
 }

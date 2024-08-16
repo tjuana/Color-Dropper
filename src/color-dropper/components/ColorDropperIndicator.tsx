@@ -1,4 +1,5 @@
 import React from 'react';
+import dropperIcon from '../../assets/Selected Color.svg';
 
 interface ColorDropperIndicatorProps {
     position: { x: number; y: number };
@@ -21,7 +22,7 @@ const ColorDropperIndicator: React.FC<ColorDropperIndicatorProps> = ({
                 left: position.x - 25,
                 top: position.y - 25,
                 borderColor: color,
-                backgroundImage: `url(${zoomedBackground})`,
+                backgroundImage: `url(${zoomedBackground}), url(${dropperIcon})`,
             }}
             role="tooltip"
             aria-label={`Current color: ${color}`}
