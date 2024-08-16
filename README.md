@@ -1,50 +1,62 @@
-# React + TypeScript + Vite
+# Color Dropper Tool
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a color dropper tool designed as part of a photo editor, allowing users to pick colors from an image displayed on an HTML5 canvas. The tool provides the hex code of the color under the cursor, changes the cursor to a dropper icon, and includes a magnification feature to assist in selecting precise colors.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Color Picking**: Users can hover over an image to see the hex code of the color under the cursor.
+- **Dynamic Circle Border**: The color dropper circle dynamically updates its border color to match the selected color.
+- **Magnifying Glass Effect**: The dropper circle acts as a magnifying glass, zooming in on the area under the cursor for precision.
+- **Dropper Icon**: The cursor changes to a dropper icon when the tool is activated, providing a familiar user experience.
+- **Color Display**: The selected color's hex code is displayed in the header upon clicking on the canvas.
 
-## Expanding the ESLint configuration
+## Technical Specifications
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+- **Canvas**: Utilizes HTML5 Canvas for rendering images and interacting with pixels.
+- **TypeScript**: The project is fully implemented in TypeScript for improved type safety and maintainability.
+- **Performance**: The tool is optimized to handle large canvases (up to 4000x4000 pixels, 16 MB).
 
-- Configure the top-level `parserOptions` property like this:
+## Installation
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+To run this project locally, follow these steps:
+
+1. **Clone the repository**:
+   ```bash
+   git clone git@github.com:tjuana/Color-Dropper.git
+   ```
+2. **Navigate to the project directory**:
+   ```bash
+   cd Color-Dropper
+   ```
+3. **Install dependencies**:
+   ```bash
+   npm install
+   ```
+4. **Run the development server**:
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+
+1. Open the application in your browser.
+2. Click on the dropper icon to activate the color dropper tool.
+3. Hover over the canvas to see the hex code of the color under the cursor.
+4. The circle will zoom in on the area under the cursor to assist in selecting colors.
+5. Click on the canvas to select a color, which will be displayed in the header.
+
+## Testing
+
+The project includes unit tests to ensure the functionality of key components. To run the tests, use:
+
+```bash
+npm run test
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## Contribution
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Feel free to fork the repository and submit pull requests. We welcome contributions to improve the tool.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## License
+
+This project is licensed under the MIT License.
