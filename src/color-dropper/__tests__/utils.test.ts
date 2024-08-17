@@ -1,4 +1,4 @@
-import { getHexColorFromImageData, getZoomedImage } from './utils';
+import { getHexColorFromImageData, getZoomedImage } from '../utils';
 
 describe('getHexColorFromImageData', () => {
   it('should return the correct hex color for given image data', () => {

@@ -44,6 +44,7 @@ const Canvas: React.FC<CanvasProps> = ({
             onFocus={onFocus}
             onBlur={onBlur}
             tabIndex={0}
+            data-testid="canvas-element"
         />
     );
 };
