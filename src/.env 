@@ -1,1 +1,0 @@
-REACT_APP_SENTRY_DSN=https://<your-sentry-dsn-url>@sentry.io/<your-project-id>

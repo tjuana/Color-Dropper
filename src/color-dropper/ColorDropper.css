@@ -23,7 +23,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+  gap: 10px;
   font-size: 1.2rem;
   color: #333;
 }
@@ -34,7 +34,6 @@ h1 {
   border-radius: 5px;
   background-color: #ffffff;
   border: 1px solid #ccc;
-  margin-right: 10px;
 }
 
 .color-dropper {
@@ -67,4 +66,43 @@ h1 {
 
 .dropper-active-cursor {
   cursor: url('../assets/IconColorPicker.svg'), auto;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  #selected-color-display {
+    flex-direction: column;
+    gap: 5px; /* Smaller gap for mobile view */
+  }
+
+  #selected-color-display div {
+    width: 30px;
+    height: 30px;
+  }
+
+  .canvas-container {
+    padding: 5px;
+    border-radius: 5px;
+  }
+
+  .color-dropper {
+    width: 40px;
+    height: 40px;
+    font-size: 12px;
+  }
+}
+
+/* Scale canvas image for mobile */
+canvas {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
 }
