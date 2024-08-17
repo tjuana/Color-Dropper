@@ -10,6 +10,16 @@ This project is a color dropper tool designed as part of a photo editor, allowin
 - **Dropper Icon**: The cursor changes to a dropper icon when the tool is activated, providing a familiar user experience.
 - **Color Display**: The selected color's hex code is displayed in the header upon clicking on the canvas.
 
+## Project Structure
+
+- **src/** - The main project code
+  - **assets/** - Project assets (icons, images)
+  - **color-dropper/** - Core logic for the Color Dropper component
+    - **components/** - Separate components for rendering (e.g., Canvas, ColorDropperIndicator)
+    - **utils.ts** - Helper functions for image processing and canvas interactions
+    - **ColorDropper.css** - Styles for the Color Dropper component
+  - **index.tsx** - Main application entry file
+
 ## Technical Specifications
 
 - **Canvas**: Utilizes HTML5 Canvas for rendering images and interacting with pixels.
@@ -60,3 +70,5 @@ Feel free to fork the repository and submit pull requests. We welcome contributi
 ## License
 
 This project is licensed under the MIT License.
+
+![Color Dropper in action](./src/assets/screenshot.png)
